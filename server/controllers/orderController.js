@@ -1,6 +1,7 @@
 const Order = require("../schema/Orders");
 const User = require("../schema/Users.js");
 const Product = require("../schema/Products.js");
+const Cart = require("../schema/Cart.js");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 //@desc Get Publishable Key
@@ -17,25 +18,20 @@ const stripeConfig = async (req, res) => {
 //@access Private
 const createOrder = async (req, res) => {
   try {
-    const { user, items, shippingAddress, billingAddress } = req.body;
-    const customer = await User.findById(user);
+    const { user, cartId, shippingAddress, billingAddress } = req.body;
+    const customer = await User.findOne({ _id: user, cart: cartId });
     if (!customer) {
       return res.status(400).json({ message: "Customer not found" });
     }
+    const cart = await Cart.findById(cartId);
+    if (!cart) {
+      return res.status(400).json({ message: "Cart not found" });
+    }
 
-    let orderPrice = 0;
-
-    const price = await Promise.all(
-      items.map(async (item) => {
-        const product = await Product.findById(item.product);
-        orderPrice += item.quantity * product.price;
-        return orderPrice;
-      })
-    );
     const orderObject = {
       user,
-      items,
-      totalPrice: orderPrice,
+      items: cart.items,
+      totalPrice: cart.total,
       shippingAddress,
       billingAddress,
     };
@@ -43,7 +39,7 @@ const createOrder = async (req, res) => {
     const order = await Order.create(orderObject);
     if (order) {
       const paymentIntent = await stripe.paymentIntents.create({
-        amount: orderPrice * 100,
+        amount: cart.total * 100,
         currency: "inr",
         automatic_payment_methods: { enabled: true },
         shipping: {
@@ -58,6 +54,8 @@ const createOrder = async (req, res) => {
           name: `${customer.firstName} ${customer.lastName}`,
         },
       });
+      customer.orders.push(order.id);
+      const updatedCustomer = await customer.save();
       return res.json({
         clientSecret: paymentIntent.client_secret,
       });

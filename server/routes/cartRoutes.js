@@ -11,7 +11,7 @@ const router = express.Router();
 router
   .post("/create", createCart)
   .get("/:userId", getCart)
-  .post("/update/:userId", updateCart)
+  .put("/update/:userId", updateCart)
   .delete("/:userId", deleteCart);
 
 module.exports = router;

@@ -7,6 +7,7 @@ router
   .post("/:sellerId", productController.createProduct)
   .get("/", productController.getProducts)
   .get("/:brandId", productController.getProductsbyBrand)
+  .get("/single/:productId", productController.getSingleProduct)
   .put("/:id", productController.updateProduct)
   .delete("/:id", productController.deleteProduct)
   .put("/favorite/:productId/:userId", productController.favoriteProduct);

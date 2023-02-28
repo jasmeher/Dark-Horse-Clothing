@@ -8,6 +8,6 @@ router
   .get("/config", orderController.stripeConfig)
   .get("/", orderController.getOrders)
   .get("/:userId", orderController.getOrdersByUserId)
-  .post("/:orderId/:status", orderController.updateOrder);
+  .put("/:orderId/:status", orderController.updateOrder);
 
 module.exports = router;

@@ -124,6 +124,23 @@ const getProductsbyBrand = async (req, res) => {
   }
 };
 
+//@desc GET Single Product
+//@route GET /products/:productId
+//access Public
+const getSingleProduct = async (req, res) => {
+  try {
+    const { productId } = req.params;
+    const product = await Product.findById(productId).lean();
+    if (!product) {
+      return res.status(400).json({ message: "Product not found" });
+    }
+
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 //@desc Update Product
 //@route PUT /products/:id
 //access Private
@@ -246,6 +263,7 @@ module.exports = {
   createProduct,
   getProducts,
   getProductsbyBrand,
+  getSingleProduct,
   updateProduct,
   deleteProduct,
   favoriteProduct,

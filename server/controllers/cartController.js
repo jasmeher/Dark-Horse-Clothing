@@ -120,6 +120,10 @@ const deleteCart = async (req, res) => {
       return res.status(400).json({ message: "Cart not found" });
     }
 
+    const user = await User.findById(userId);
+
+    user.cart = null;
+    const updatedUser = await user.save();
     const result = await cart.deleteOne();
 
     const reply = `Cart of user with userId ${userId} deleted successfully`;

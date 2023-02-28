@@ -13,7 +13,6 @@ const orderSchema = new mongoose.Schema(
         quantity: { type: Number },
         size: { type: String },
         color: { type: String },
-        price: { type: Number },
       },
     ],
     totalPrice: { type: Number },
