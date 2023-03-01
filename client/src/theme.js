@@ -55,8 +55,8 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#ff00e7", // Neon pink color
-      hover: "#e700c6", // Darker pink hover color
+      main: "#18d944", // Bright green color
+      hover: "#14a637", // Darker green hover color
     },
     secondary: {
       main: "#00a3e0", // electric blue color
@@ -64,13 +64,14 @@ const theme = createTheme({
     },
     background: {
       main: "#111",
+      secondary: "#222",
     },
     text: {
       primary: "#fff",
     },
     success: {
-      main: "#18d944", // Bright green color
-      hover: "#14a637", // Darker green hover color
+      main: "#228B22", // forest green color
+      hover: "#1e6823", // Darker green hover color
     },
     error: {
       main: "#ff3f3f", // Red color
