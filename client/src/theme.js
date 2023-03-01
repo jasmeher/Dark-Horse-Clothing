@@ -52,6 +52,12 @@ const theme = createTheme({
       fontWeight: 400,
       color: "#fff",
     },
+    dollar: {
+      fontSize: "1rem",
+      fontWeight: 400,
+      color: "#fff",
+      fontFamily: "Shantell Sans",
+    },
   },
   palette: {
     primary: {

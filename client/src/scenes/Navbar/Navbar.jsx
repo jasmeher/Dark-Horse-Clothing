@@ -128,6 +128,7 @@ const Navbar = () => {
           alignItems: "center",
           padding: "0 20px",
           flexDirection: "row",
+          zIndex: "1",
         }}
       >
         <Box width="33.33vw" display="flex" alignItems="center">

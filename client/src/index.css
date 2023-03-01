@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans&family=Shantell+Sans&display=swap");
 
 html,
 body,
@@ -6,7 +6,9 @@ body,
 .app {
   height: 100%;
   width: 100%;
+  overflow-x: hidden;
   font-family: "Inter", sans-serif;
+  background-color: #111;
 }
 
 ::-webkit-scrollbar {
