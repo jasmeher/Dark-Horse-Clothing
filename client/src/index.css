@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans&family=Shantell+Sans&display=swap");
 
+* {
+  box-sizing: border-box !important;
+}
+
 html,
 body,
 #root,
@@ -9,6 +13,11 @@ body,
   overflow-x: hidden;
   font-family: "Inter", sans-serif;
   background-color: #111;
+  cursor: none;
+}
+
+body:hover #cursor {
+  opacity: 1;
 }
 
 ::-webkit-scrollbar {
@@ -35,4 +44,5 @@ body,
   padding: 0;
   color: inherit;
   text-decoration: none;
+  cursor: none;
 }

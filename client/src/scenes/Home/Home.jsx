@@ -1,116 +1,157 @@
+import { ArrowBackOutlined, ArrowForwardOutlined } from "@mui/icons-material";
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
-import React from "react";
-import graffiti1 from "static/graffiti-1.png";
-import graffiti2 from "static/graffiti-2.png";
+import React, { useEffect } from "react";
+import collection from "static/collection.jpg";
+import graffiti from "static/graffiti-1.png";
 import crown from "static/crown.png";
 
 const Home = () => {
-  const isMediumDevice = useMediaQuery("(max-width: 768px)");
+  const isNonMediumScreens = useMediaQuery("(min-width: 900px)");
+  const isNonSmallScreens = useMediaQuery("(min-width: 576px)");
+  useEffect(() => {
+    document.title = "DARK HORSE CLOTHING - HOME";
+  }, []);
   return (
     <Box
-      display="grid"
-      margin="20px"
-      gap="20px"
-      gridTemplateColumns="repeat(12,1fr)"
       sx={{
-        "& > div": {
-          gridColumn: isMediumDevice ? "span 12" : undefined,
-        },
-        minHeight: "fit-content",
+        width: "100%",
+        minHeight: "90vh",
+        borderBottom: "1px solid rgba(255,255,255,0.2)",
       }}
     >
       <Box
-        gridColumn="span 5"
-        display="flex"
-        justifyContent="center"
-        alignItems="flex-start"
-        flexDirection="column"
+        display="grid"
         minHeight="90vh"
-        gap="25px"
-        sx={{ position: "relative" }}
+        gridTemplateColumns="2fr 1fr"
+        gridTemplateRows="2fr 1fr"
+        sx={{
+          "& > div": {
+            gridColumn: isNonMediumScreens ? undefined : "span 12",
+          },
+        }}
       >
-        <Typography
-          variant="body1"
+        {/* IMAGE SECTION */}
+        <Box
           sx={{
-            opacity: "0.6",
-            letterSpacing: "3px",
-            position: "absolute",
-            top: "20px",
-            zIndex: "0",
+            backgroundImage: `url(${collection})`,
+            backgroundSize: "cover",
+            filter: "grayscale(40%)",
+            transition: "500ms ease",
+            backgroundPosition: isNonMediumScreens ? "top" : "center",
+            "&:hover": { filter: "grayscale(0%)" },
+          }}
+        ></Box>
+        {/* DESCRIPTION SECTION */}
+        <Box
+          sx={{
+            borderLeft: "1px solid rgba(255,255,255,0.2)",
+            padding: "40px",
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "flex-end",
+            position: "relative",
           }}
         >
-          NEW ARRIVALS
-        </Typography>
-        <Box
-          component="img"
-          src={graffiti1}
-          sx={{
-            position: "absolute",
-            top: "20px",
-            left: "40px",
-            opacity: "0.4",
-            width: "500px",
-            zIndex: "0",
-          }}
-        />
-
-        <Box sx={{ zIndex: "1", position: "relative" }}>
           <Box
             component="img"
-            src={crown}
+            src={graffiti}
+            alt="graffiti"
             sx={{
               position: "absolute",
-              top: "-50px",
-              left: "-10px",
-              width: "70px",
-              zIndex: "1",
-              filter:
-                "invert(70%) sepia(27%) saturate(3890%) hue-rotate(81deg) brightness(150%) contrast(93%)",
-              transform: "rotate(-35deg)",
+              width: "260px",
+              left: "50%",
+              top: "40%",
+              transform: "translate(-50%, -50%)",
+              opacity: "0.6",
+              display: isNonMediumScreens ? "block" : "none",
             }}
           />
-          <Typography variant="h1">PRODUCT NAME</Typography>
-        </Box>
-        <Typography
-          variant="h4"
-          sx={{ zIndex: "1", display: "flex", alignItems: "center" }}
-        >
-          <Typography variant="dollar" sx={{ fontSize: "1.5rem", mr: "5px" }}>
-            $
+          <Typography variant="body2" sx={{ opacity: "0.75" }}>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos
+            quaerat ducimus exercitationem error maxime, quia eum illum nesciunt
+            id necessitatibus perferendis fuga excepturi! Deleniti, itaque?
+            Deleniti, itaque?
           </Typography>
-          59.99
-        </Typography>
-        <Box display="flex" alignItems="center" gap="30px">
-          <Button variant="contained" size="large" sx={{ zIndex: "1" }}>
-            ADD TO CART
-          </Button>
-          <Button variant="outlined" size="large" sx={{ zIndex: "1" }}>
-            VIEW
+        </Box>
+        {/* TITLE SECTION */}
+        <Box
+          sx={{
+            borderTop: "1px solid rgba(255,255,255,0.2)",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: isNonSmallScreens ? "0 20px" : "20px 20px",
+            flexDirection: isNonSmallScreens ? "row" : "column",
+          }}
+        >
+          <Box
+            sx={{
+              position: "relative",
+              width: "fit-content",
+            }}
+          >
+            <Box
+              component="img"
+              src={crown}
+              alt="graffiti"
+              sx={{
+                position: "absolute",
+                width: "60px",
+                top: "-25px",
+                right: "-40px",
+                display: isNonMediumScreens ? "block" : "none",
+                transform: "rotate(35deg)",
+                filter:
+                  "invert(70%) sepia(27%) saturate(3890%) hue-rotate(81deg) brightness(160%) contrast(93%)",
+              }}
+            />
+            <Typography variant="h1">STREETWEAR 90'S</Typography>
+          </Box>
+          <Button
+            className="text-reset"
+            variant="contained"
+            size="large"
+            sx={{ "&:hover": { cursor: "none" } }}
+          >
+            VIEW COLLECTION
           </Button>
         </Box>
-      </Box>
-      <Box
-        gridColumn="span 7"
-        display="flex"
-        justifyContent="center"
-        alignItems="flex-start"
-        flexDirection="column"
-        minHeight="90vh"
-        gap="25px"
-        sx={{ position: "relative" }}
-      >
+        {/* BUTTON SECTION */}
         <Box
-          component="img"
-          src={graffiti2}
           sx={{
-            position: "absolute",
-            top: "20px",
-            right: "40px",
-            opacity: "0.4",
-            width: "500px",
-            zIndex: "0",
+            borderLeft: "1px solid rgba(255,255,255,0.2)",
+            borderTop: "1px solid rgba(255,255,255,0.2)",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
-        />
+        >
+          <Button
+            sx={{
+              background: "none",
+              width: "50%",
+              height: "100%",
+              borderRadius: "0",
+              "&:hover": { cursor: "none" },
+            }}
+            className="text-reset"
+          >
+            <ArrowBackOutlined sx={{ fontSize: "70px" }} />
+          </Button>
+          <Button
+            sx={{
+              background: "none",
+              width: "50%",
+              height: "100%",
+              borderRadius: "0",
+              borderLeft: "1px solid rgba(255,255,255,0.2)",
+              "&:hover": { cursor: "none" },
+            }}
+            className="text-reset"
+          >
+            <ArrowForwardOutlined sx={{ fontSize: "70px" }} />
+          </Button>
+        </Box>
       </Box>
     </Box>
   );

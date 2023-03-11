@@ -6,6 +6,7 @@ import {
   useTheme,
   useMediaQuery,
   Drawer,
+  IconButton,
 } from "@mui/material";
 import {
   SearchOutlined,
@@ -15,7 +16,7 @@ import {
   DragHandleOutlined,
   CloseOutlined,
 } from "@mui/icons-material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "static/logo-invert.png";
 
 const navCat = [
@@ -40,6 +41,10 @@ const navCat = [
     link: "/products/accessories",
   },
   {
+    title: "CART",
+    link: "/cart",
+  },
+  {
     title: "FAVORITES",
     link: "/favorites",
   },
@@ -52,58 +57,21 @@ const navCat = [
 const Navbar = () => {
   const isMediumDevice = useMediaQuery("(max-width: 768px)");
   const theme = useTheme();
-  const navigate = useNavigate();
   const navIcons = [
     {
-      icon: (
-        <SearchOutlined
-          sx={{
-            "&:hover": {
-              cursor: "pointer",
-              color: theme.palette.primary.main,
-            },
-          }}
-        />
-      ),
+      icon: <SearchOutlined />,
       link: "/search",
     },
     {
-      icon: (
-        <PersonOutlineOutlined
-          sx={{
-            "&:hover": {
-              cursor: "pointer",
-              color: theme.palette.primary.main,
-            },
-          }}
-        />
-      ),
+      icon: <PersonOutlineOutlined />,
       link: "/signin",
     },
     {
-      icon: (
-        <FavoriteBorderOutlined
-          sx={{
-            "&:hover": {
-              cursor: "pointer",
-              color: theme.palette.primary.main,
-            },
-          }}
-        />
-      ),
+      icon: <FavoriteBorderOutlined />,
       link: "/favorites",
     },
     {
-      icon: (
-        <ShoppingBagOutlined
-          sx={{
-            "&:hover": {
-              cursor: "pointer",
-              color: theme.palette.primary.main,
-            },
-          }}
-        />
-      ),
+      icon: <ShoppingBagOutlined />,
       link: "/cart",
     },
   ];
@@ -121,48 +89,136 @@ const Navbar = () => {
           width: "100%",
           backgroundColor: theme.palette.background.main,
           boxShadow: "none",
-          height: "8vh",
-          borderBottom: `1px solid ${theme.palette.text.primary}`,
+          borderBottom: "1px solid rgb(255,255,255,0.2)",
           display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "0 20px",
           flexDirection: "row",
           zIndex: "1",
         }}
       >
-        <Box width="33.33vw" display="flex" alignItems="center">
-          <Box
-            component="img"
-            alt="DARK HORSE"
-            src={logo}
-            width="62px"
-            height="62px"
-            marginLeft="-5px"
+        {/* LOGO SECTION */}
+        <Box
+          sx={{
+            display: "flex",
+            gap: "1rem",
+            flexBasis: "calc(100%/3)",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            paddingLeft: "20px",
+          }}
+        >
+          <Link to="/" className="text-reset">
+            <Box
+              component="img"
+              alt="DARK HORSE"
+              src={logo}
+              width="62px"
+              height="62px"
+              marginLeft="-5px"
+              sx={{
+                "&:hover": {
+                  cursor: "none",
+                  filter:
+                    "invert(70%) sepia(27%) saturate(3890%) hue-rotate(81deg) brightness(150%) contrast(93%)",
+                },
+              }}
+            />
+          </Link>
+        </Box>
+        {/* LINK SECTION */}
+        <Box
+          sx={{
+            display: isMediumDevice ? "none" : "flex",
+            gap: "2rem",
+            justifyContent: "center",
+            alignItems: "center",
+            borderLeft: "1px solid rgb(255,255,255,0.2)",
+            flexBasis: "calc(100%/3)",
+            padding: "0 20px",
+            boxSizing: "border-box",
+          }}
+        >
+          {navIcons.map((icon) => (
+            <Link to={icon.link} className="text-reset" key={icon.link}>
+              <IconButton
+                sx={{
+                  color: theme.palette.text.primary,
+                  "&:hover": {
+                    cursor: "none",
+                    color: theme.palette.primary.main,
+                  },
+                }}
+              >
+                {icon.icon}
+              </IconButton>
+            </Link>
+          ))}
+        </Box>
+        {/* DRAWER SECTION */}
+        <Box
+          sx={{
+            display: "flex",
+            gap: "1rem",
+            justifyContent: "flex-end",
+            alignItems: "center",
+            borderLeft: "1px solid rgb(255,255,255,0.2)",
+            flexGrow: "1",
+            paddingRight: "20px",
+          }}
+        >
+          <IconButton
             sx={{
+              color: theme.palette.text.primary,
               "&:hover": {
-                cursor: "pointer",
-                filter:
-                  "invert(70%) sepia(27%) saturate(3890%) hue-rotate(81deg) brightness(150%) contrast(93%)",
+                cursor: "none",
+                color: theme.palette.primary.main,
               },
             }}
-            onClick={() => navigate("/")}
-          />
+            className="text-reset"
+            onClick={() => setIsDrawerOpen(true)}
+          >
+            <DragHandleOutlined />
+          </IconButton>
         </Box>
-        <Box
-          justifyContent="center"
-          alignItems="center"
-          gap="20px"
-          sx={{ display: isMediumDevice ? "none" : "flex" }}
-        >
-          {navCat.map(
-            (item, index) =>
-              index > 0 &&
-              index < 5 && (
+      </AppBar>
+      <Drawer anchor={"right"} open={isDrawerOpen} onClose={handleClose}>
+        {isMediumDevice ? (
+          <Box
+            sx={{
+              width: 300,
+              height: "100%",
+              backgroundColor: theme.palette.background.secondary,
+              padding: "10px 20px",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <Box
+              width="100%"
+              display="flex"
+              justifyContent="flex-end"
+              alignItems="center"
+            >
+              <CloseOutlined
+                onClick={handleClose}
+                sx={{
+                  "&:hover": {
+                    cursor: "none",
+                    color: theme.palette.primary.main,
+                  },
+                }}
+              />
+            </Box>
+            <Box
+              justifyContent="center"
+              alignItems="flex-start"
+              flexDirection="column"
+              gap="20px"
+            >
+              {navCat.map((item) => (
                 <Typography
                   sx={{
                     "&:hover": {
-                      cursor: "pointer",
+                      cursor: "none",
                       color: theme.palette.primary.main,
                     },
                   }}
@@ -172,105 +228,60 @@ const Navbar = () => {
                     {item.title}
                   </Link>
                 </Typography>
-              )
-          )}
-        </Box>
-        <Box
-          width="33.33vw"
-          justifyContent="flex-end"
-          sx={{ display: isMediumDevice ? "none" : "flex" }}
-        >
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            gap="20px"
-            color={theme.palette.text.primary}
-          >
-            {navIcons.map((item) => (
-              <div key={item.link}>
-                <Link
-                  to={item.link}
-                  className="text-reset"
-                  style={{ display: "flex" }}
-                >
-                  {item.icon}
-                </Link>
-              </div>
-            ))}
+              ))}
+            </Box>
           </Box>
-        </Box>
-        <Box
-          justifyContent="flex-end"
-          alignItems="center"
-          gap="10px"
-          sx={{ display: isMediumDevice ? "flex" : "none", color: "white" }}
-        >
-          <Link to="/cart" className="text-reset" style={{ display: "flex" }}>
-            <ShoppingBagOutlined
-              sx={{
-                "&:hover": {
-                  cursor: "pointer",
-                  color: theme.palette.primary.main,
-                },
-              }}
-            />
-          </Link>
-          <DragHandleOutlined
+        ) : (
+          <Box
             sx={{
-              fontSize: "36px",
-              "&:hover": {
-                cursor: "pointer",
-                color: theme.palette.primary.main,
-              },
+              width: "100vw",
+              height: "100%",
+              backgroundColor: theme.palette.background.secondary,
+              padding: "10px 20px",
+              display: "flex",
+              flexDirection: "column",
             }}
-            onClick={() => setIsDrawerOpen(true)}
-          />
-        </Box>
-      </AppBar>
-      <Drawer anchor={"right"} open={isDrawerOpen} onClose={handleClose}>
-        <Box
-          sx={{
-            width: 300,
-            height: "100%",
-            backgroundColor: theme.palette.background.secondary,
-            padding: "10px 20px",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <Box
-            width="100%"
-            display="flex"
-            justifyContent="flex-end"
-            alignItems="center"
           >
-            <CloseOutlined onClick={handleClose} />
-          </Box>
-          <Box
-            justifyContent="center"
-            alignItems="flex-start"
-            flexDirection="column"
-            gap="20px"
-            sx={{ display: isMediumDevice ? "flex" : "none" }}
-          >
-            {navCat.map((item) => (
-              <Typography
+            <Box
+              width="100%"
+              display="flex"
+              justifyContent="flex-end"
+              alignItems="center"
+            >
+              <CloseOutlined
+                onClick={handleClose}
                 sx={{
                   "&:hover": {
-                    cursor: "pointer",
+                    cursor: "none",
                     color: theme.palette.primary.main,
                   },
                 }}
-                key={item.title}
-              >
-                <Link to={item.link} className="text-reset">
-                  {item.title}
-                </Link>
-              </Typography>
-            ))}
+              />
+            </Box>
+            <Box
+              justifyContent="center"
+              alignItems="flex-start"
+              flexDirection="column"
+              gap="20px"
+            >
+              {navCat.map((item) => (
+                <Typography
+                  sx={{
+                    "&:hover": {
+                      cursor: "none",
+                      color: theme.palette.primary.main,
+                    },
+                  }}
+                  key={item.title}
+                >
+                  <Link to={item.link} className="text-reset">
+                    {item.title}
+                  </Link>
+                </Typography>
+              ))}
+            </Box>
           </Box>
-        </Box>
+        )}
       </Drawer>
     </>
   );
