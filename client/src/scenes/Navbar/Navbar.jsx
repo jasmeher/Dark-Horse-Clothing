@@ -21,6 +21,8 @@ import logo from "static/logo-invert.png";
 import men from "static/men.jpg";
 import women from "static/women.jpg";
 import unisex from "static/unisex.jpg";
+import accessories from "static/accessories.jpg";
+import navBG from "static/navBg.jpg";
 import Hacker from "components/Hacker/Hacker";
 
 const navCat = [
@@ -47,7 +49,7 @@ const navCat = [
   {
     title: "ACCESSORIES",
     link: "/products/accessories",
-    src: null,
+    src: accessories,
   },
   {
     title: "CART",
@@ -90,6 +92,7 @@ const Navbar = () => {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const handleClose = () => setIsDrawerOpen(false);
+  const [position, setPosition] = useState("0 0");
   return (
     <>
       <AppBar
@@ -252,14 +255,32 @@ const Navbar = () => {
               padding: "10px 20px",
               display: "flex",
               flexDirection: "column",
+              position: "relative",
             }}
           >
+            <Box
+              sx={{
+                background: `url(${navBG})`,
+                backgroundSize: "100%",
+                backgroundPosition: position,
+                position: "absolute",
+                width: "100%",
+                height: "100%",
+                top: "0",
+                left: "0",
+                opacity: "0.1",
+                filter: "contrast(1.25)",
+                zIndex: "0",
+                transition: "800ms ease",
+              }}
+            />
             <Box
               width="100%"
               display="flex"
               justifyContent="flex-end"
               alignItems="center"
               marginBottom="20px"
+              sx={{ zIndex: "1" }}
             >
               <CloseOutlined
                 onClick={handleClose}
@@ -278,11 +299,29 @@ const Navbar = () => {
               flexDirection="column"
               gap="20px"
               padding="50px 60px 0 60px"
+              sx={{ zIndex: "1" }}
             >
               {navCat.map((item, index) => {
                 if (index > 0 && index < 5) {
                   return (
-                    <Link to={item.link} className="text-reset">
+                    <Link
+                      to={item.link}
+                      className="text-reset"
+                      onMouseOver={() => {
+                        if (index === 1) {
+                          setPosition("0 25%");
+                        }
+                        if (index === 2) {
+                          setPosition("0 50%");
+                        }
+                        if (index === 3) {
+                          setPosition("0 75%");
+                        }
+                        if (index === 4) {
+                          setPosition("0 100%");
+                        }
+                      }}
+                    >
                       <Box
                         key={item.title}
                         sx={{
@@ -324,6 +363,8 @@ const Navbar = () => {
                               transform: `rotate(-${Math.floor(
                                 Math.random() * 20
                               )}deg)`,
+                              boxShadow:
+                                "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",
                             }}
                           />
                         )}
@@ -351,6 +392,57 @@ const Navbar = () => {
                 }
                 return null;
               })}
+            </Box>
+            <Box
+              margin="auto 0 10px 60px"
+              display="flex"
+              gap="20px"
+              sx={{ zIndex: "1" }}
+            >
+              <Typography
+                sx={{
+                  "&:hover": {
+                    cursor: "none",
+                    color: theme.palette.primary.main,
+                  },
+                }}
+                className="text-reset"
+              >
+                FACEBOOK
+              </Typography>
+              <Typography
+                sx={{
+                  "&:hover": {
+                    cursor: "none",
+                    color: theme.palette.primary.main,
+                  },
+                }}
+                className="text-reset"
+              >
+                INSTAGRAM
+              </Typography>
+              <Typography
+                sx={{
+                  "&:hover": {
+                    cursor: "none",
+                    color: theme.palette.primary.main,
+                  },
+                }}
+                className="text-reset"
+              >
+                TWITTER
+              </Typography>
+              <Typography
+                sx={{
+                  "&:hover": {
+                    cursor: "none",
+                    color: theme.palette.primary.main,
+                  },
+                }}
+                className="text-reset"
+              >
+                YOUTUBE
+              </Typography>
             </Box>
           </Box>
         )}

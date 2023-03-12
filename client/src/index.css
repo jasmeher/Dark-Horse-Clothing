@@ -31,12 +31,12 @@ body:hover #cursor {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #ff00e7;
+  background: #18d944;
 }
 
 /* Handle on Hover */
-::-webkit-scrollbar-track:hover {
-  background: #e700c6;
+::-webkit-scrollbar-thumb:hover {
+  background: #14a637;
 }
 
 .text-reset {
