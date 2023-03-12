@@ -37,7 +37,7 @@ const Home = () => {
             backgroundSize: "cover",
             filter: "grayscale(40%)",
             transition: "500ms ease",
-            backgroundPosition: isNonMediumScreens ? "top" : "center",
+            backgroundPosition: isNonMediumScreens ? "center 0%" : "center",
             "&:hover": { filter: "grayscale(0%)" },
           }}
         ></Box>

@@ -1,4 +1,4 @@
-import { PanToolAltOutlined } from "@mui/icons-material";
+import { PanToolAlt } from "@mui/icons-material";
 import { useMediaQuery } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import "./style.css";
@@ -15,7 +15,7 @@ const CustomCursor = () => {
 
     const keyframes = {
       transform: `translate(${x}px , ${y}px) scale(${interacting ? 1.4 : 1})`,
-      backgroundColor: `${interacting ? "#18d944" : "#14a637"}`,
+      backgroundColor: `${interacting ? "#00000000" : "#14a637"}`,
     };
 
     cursorRef.current.animate(keyframes, {
@@ -45,10 +45,7 @@ const CustomCursor = () => {
       ref={cursorRef}
       style={{ display: isMediumDevice ? "none" : "flex" }}
     >
-      <PanToolAltOutlined
-        ref={iconRef}
-        sx={{ display: hide ? "none" : "block" }}
-      />
+      <PanToolAlt ref={iconRef} sx={{ display: hide ? "none" : "block" }} />
     </div>
   );
 };

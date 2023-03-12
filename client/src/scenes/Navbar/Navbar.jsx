@@ -18,39 +18,51 @@ import {
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import logo from "static/logo-invert.png";
+import men from "static/men.jpg";
+import women from "static/women.jpg";
+import unisex from "static/unisex.jpg";
+import Hacker from "components/Hacker/Hacker";
 
 const navCat = [
   {
     title: "SEARCH",
     link: "/search",
+    src: null,
   },
   {
     title: "MEN",
     link: "/products/men",
+    src: men,
   },
   {
     title: "WOMEN",
     link: "/products/women",
+    src: women,
   },
   {
     title: "UNISEX",
     link: "/products/unisex",
+    src: unisex,
   },
   {
     title: "ACCESSORIES",
     link: "/products/accessories",
+    src: null,
   },
   {
     title: "CART",
     link: "/cart",
+    src: null,
   },
   {
     title: "FAVORITES",
     link: "/favorites",
+    src: null,
   },
   {
     title: "SIGN IN",
     link: "/signin",
+    src: null,
   },
 ];
 
@@ -247,6 +259,7 @@ const Navbar = () => {
               display="flex"
               justifyContent="flex-end"
               alignItems="center"
+              marginBottom="20px"
             >
               <CloseOutlined
                 onClick={handleClose}
@@ -256,6 +269,7 @@ const Navbar = () => {
                     color: theme.palette.primary.main,
                   },
                 }}
+                className="text-reset"
               />
             </Box>
             <Box
@@ -263,22 +277,80 @@ const Navbar = () => {
               alignItems="flex-start"
               flexDirection="column"
               gap="20px"
+              padding="50px 60px 0 60px"
             >
-              {navCat.map((item) => (
-                <Typography
-                  sx={{
-                    "&:hover": {
-                      cursor: "none",
-                      color: theme.palette.primary.main,
-                    },
-                  }}
-                  key={item.title}
-                >
-                  <Link to={item.link} className="text-reset">
-                    {item.title}
-                  </Link>
-                </Typography>
-              ))}
+              {navCat.map((item, index) => {
+                if (index > 0 && index < 5) {
+                  return (
+                    <Link to={item.link} className="text-reset">
+                      <Box
+                        key={item.title}
+                        sx={{
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          position: "relative",
+                          "&:hover": {
+                            "& > img": { opacity: "1" },
+                          },
+                        }}
+                      >
+                        <Hacker
+                          value={item.title}
+                          link={item.link}
+                          style={{
+                            width: "fit-content",
+                            fontSize: "3.5rem",
+                            marginBottom: "2rem",
+                            "&:hover": {
+                              cursor: "none",
+                              color: theme.palette.primary.main,
+                            },
+                          }}
+                        />
+                        {item.src !== null && (
+                          <Box
+                            component="img"
+                            alt="category"
+                            src={item.src}
+                            sx={{
+                              opacity: "0",
+                              transition: "500ms ease",
+                              position: "absolute",
+                              width: "150px",
+                              top: "-50px",
+                              right: "0",
+                              transform: `rotate(-${Math.floor(
+                                Math.random() * 20
+                              )}deg)`,
+                            }}
+                          />
+                        )}
+                      </Box>
+                    </Link>
+                  );
+                }
+                if (index >= 5) {
+                  return (
+                    <Typography
+                      sx={{
+                        width: "fit-content",
+                        "&:hover": {
+                          cursor: "none",
+                          color: theme.palette.primary.main,
+                        },
+                      }}
+                      key={item.title}
+                    >
+                      <Link to={item.link} className="text-reset">
+                        {item.title}
+                      </Link>
+                    </Typography>
+                  );
+                }
+                return null;
+              })}
             </Box>
           </Box>
         )}
