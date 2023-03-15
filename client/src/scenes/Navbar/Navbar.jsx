@@ -131,7 +131,6 @@ const Navbar = () => {
               marginLeft="-5px"
               sx={{
                 "&:hover": {
-                  cursor: "none",
                   filter:
                     "invert(70%) sepia(27%) saturate(3890%) hue-rotate(81deg) brightness(150%) contrast(93%)",
                 },
@@ -158,7 +157,6 @@ const Navbar = () => {
                 sx={{
                   color: theme.palette.text.primary,
                   "&:hover": {
-                    cursor: "none",
                     color: theme.palette.primary.main,
                   },
                 }}
@@ -184,7 +182,6 @@ const Navbar = () => {
             sx={{
               color: theme.palette.text.primary,
               "&:hover": {
-                cursor: "none",
                 color: theme.palette.primary.main,
               },
             }}
@@ -217,7 +214,6 @@ const Navbar = () => {
                 onClick={handleClose}
                 sx={{
                   "&:hover": {
-                    cursor: "none",
                     color: theme.palette.primary.main,
                   },
                 }}
@@ -233,7 +229,6 @@ const Navbar = () => {
                 <Typography
                   sx={{
                     "&:hover": {
-                      cursor: "none",
                       color: theme.palette.primary.main,
                     },
                   }}
@@ -268,8 +263,8 @@ const Navbar = () => {
                 height: "100%",
                 top: "0",
                 left: "0",
-                opacity: "0.1",
-                filter: "contrast(1.25)",
+                opacity: "0.07",
+                filter: "contrast(1.6)",
                 zIndex: "0",
                 transition: "800ms ease",
               }}
@@ -286,8 +281,8 @@ const Navbar = () => {
                 onClick={handleClose}
                 sx={{
                   "&:hover": {
-                    cursor: "none",
                     color: theme.palette.primary.main,
+                    cursor: "pointer",
                   },
                 }}
                 className="text-reset"
@@ -321,9 +316,9 @@ const Navbar = () => {
                           setPosition("0 100%");
                         }
                       }}
+                      key={item.title}
                     >
                       <Box
-                        key={item.title}
                         sx={{
                           width: "100%",
                           display: "flex",
@@ -343,7 +338,6 @@ const Navbar = () => {
                             fontSize: "3.5rem",
                             marginBottom: "2rem",
                             "&:hover": {
-                              cursor: "none",
                               color: theme.palette.primary.main,
                             },
                           }}
@@ -378,7 +372,6 @@ const Navbar = () => {
                       sx={{
                         width: "fit-content",
                         "&:hover": {
-                          cursor: "none",
                           color: theme.palette.primary.main,
                         },
                       }}
@@ -402,7 +395,6 @@ const Navbar = () => {
               <Typography
                 sx={{
                   "&:hover": {
-                    cursor: "none",
                     color: theme.palette.primary.main,
                   },
                 }}
@@ -413,7 +405,6 @@ const Navbar = () => {
               <Typography
                 sx={{
                   "&:hover": {
-                    cursor: "none",
                     color: theme.palette.primary.main,
                   },
                 }}
@@ -424,7 +415,6 @@ const Navbar = () => {
               <Typography
                 sx={{
                   "&:hover": {
-                    cursor: "none",
                     color: theme.palette.primary.main,
                   },
                 }}
@@ -435,7 +425,6 @@ const Navbar = () => {
               <Typography
                 sx={{
                   "&:hover": {
-                    cursor: "none",
                     color: theme.palette.primary.main,
                   },
                 }}

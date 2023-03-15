@@ -13,7 +13,6 @@ body,
   overflow-x: hidden;
   font-family: "Inter", sans-serif;
   background-color: #111;
-  cursor: none;
 }
 
 body:hover #cursor {
@@ -44,5 +43,4 @@ body:hover #cursor {
   padding: 0;
   color: inherit;
   text-decoration: none;
-  cursor: none;
 }

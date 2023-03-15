@@ -51,7 +51,6 @@ const HeroSection = () => {
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
     if (isLeftSwipe || isRightSwipe) isLeftSwipe ? NextSlide() : prevSlide();
-    console.log(currentIndex);
   };
 
   return (
@@ -124,9 +123,24 @@ const HeroSection = () => {
             justifyContent: "space-between",
             alignItems: "center",
             padding: isNonSmallScreens ? "0 20px" : "20px 20px",
+            border: isNonMediumScreens
+              ? "0px"
+              : "1px solid rgba(255,255,255,0.2)",
             flexDirection: isNonSmallScreens ? "row" : "column",
+            position: "relative",
           }}
         >
+          <Typography
+            sx={{
+              position: "absolute",
+              top: "5px",
+              left: "20px",
+              textTransform: "uppercase",
+              display: isNonMediumScreens ? "block" : "none",
+            }}
+          >
+            NIKE
+          </Typography>
           <Box
             sx={{
               position: "relative",
@@ -152,12 +166,7 @@ const HeroSection = () => {
               {collections[currentIndex].title}
             </Typography>
           </Box>
-          <Button
-            className="text-reset"
-            variant="contained"
-            size="large"
-            sx={{ "&:hover": { cursor: "none" } }}
-          >
+          <Button className="text-reset" variant="contained" size="large">
             VIEW COLLECTION
           </Button>
         </Box>
@@ -177,7 +186,6 @@ const HeroSection = () => {
               width: "50%",
               height: "100%",
               borderRadius: "0",
-              "&:hover": { cursor: "none" },
             }}
             onClick={prevSlide}
             className="text-reset"
@@ -191,7 +199,6 @@ const HeroSection = () => {
               height: "100%",
               borderRadius: "0",
               borderLeft: "1px solid rgba(255,255,255,0.2)",
-              "&:hover": { cursor: "none" },
             }}
             onClick={NextSlide}
             className="text-reset"

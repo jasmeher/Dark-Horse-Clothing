@@ -1,12 +1,9 @@
-import { PanToolAlt } from "@mui/icons-material";
 import { useMediaQuery } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import "./style.css";
 
 const CustomCursor = () => {
   const cursorRef = useRef(null);
-  const iconRef = useRef(null);
-  const [hide, setHide] = useState(true);
   const isMediumDevice = useMediaQuery("(max-width: 768px)");
 
   const animateTrailer = (e, interacting) => {
@@ -15,7 +12,7 @@ const CustomCursor = () => {
 
     const keyframes = {
       transform: `translate(${x}px , ${y}px) scale(${interacting ? 1.4 : 1})`,
-      backgroundColor: `${interacting ? "#00000000" : "#14a637"}`,
+      // backgroundColor: `${interacting ? "#00000000" : "#14a637"}`,
     };
 
     cursorRef.current.animate(keyframes, {
@@ -30,11 +27,6 @@ const CustomCursor = () => {
         const interactable = e.target.closest(".text-reset"),
           interacting = interactable !== null;
 
-        if (interacting) {
-          setHide(false);
-        } else {
-          setHide(true);
-        }
         animateTrailer(e, interacting);
       };
     }
@@ -44,9 +36,7 @@ const CustomCursor = () => {
       id="cursor"
       ref={cursorRef}
       style={{ display: isMediumDevice ? "none" : "flex" }}
-    >
-      <PanToolAlt ref={iconRef} sx={{ display: hide ? "none" : "block" }} />
-    </div>
+    ></div>
   );
 };
 
