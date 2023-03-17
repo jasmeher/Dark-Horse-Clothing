@@ -5,21 +5,25 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "scenes/Layout/Layout";
 import Home from "scenes/Home/Home";
 import CustomCursor from "components/Custom/CustomCursor";
+import LoaderPage from "scenes/LoaderPage/LoaderPage";
 
 const App = () => {
   return (
     <div className="app">
-      <Router>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <CustomCursor />
-          <Routes>
-            <Route element={<Layout />}>
-              <Route path="/" element={<Home />} />
-            </Route>
-          </Routes>
-        </ThemeProvider>
-      </Router>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <LoaderPage />
+        <div className="main">
+          <Router>
+            <CustomCursor />
+            <Routes>
+              <Route element={<Layout />}>
+                <Route path="/" element={<Home />} />
+              </Route>
+            </Routes>
+          </Router>
+        </div>
+      </ThemeProvider>
     </div>
   );
 };

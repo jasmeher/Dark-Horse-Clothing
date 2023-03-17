@@ -16,7 +16,7 @@ const HeroSection = () => {
   const collections = [
     {
       img: collection,
-      desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos quaerat ducimus exercitationem error maxime, quia eum illum nesciunt id necessitatibus perferendis fuga excepturi! Deleniti, itaque? Deleniti, itaque?",
+      desc: "Introducing our newest clothing collection inspired by the fashion trends of the '90s. Get ready to relive the era of bold prints, baggy clothing, oversized blazers, and denim jackets in vibrant colors!",
       title: "STREETWEAR 90'S",
     },
     {

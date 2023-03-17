@@ -500,9 +500,10 @@ const Home = () => {
               }}
             />
             <Typography sx={{ textAlign: "center" }}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-              possimus dolore amet rem facere quibusdam vero similique harum
-              consequuntur delectus?
+              Shop for stylish and trendy clothing items suitable for Men,
+              Women, and Unisex apparel, featuring versatile designs and
+              high-quality materials to fit a diverse range of fashion
+              preferences.
             </Typography>
             <Box
               display="flex"
