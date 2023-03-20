@@ -2,7 +2,7 @@ import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 
-const Card = ({ width, height, name, price, img }) => {
+const Card = ({ width, height, name, price, img, classIdentifier }) => {
   return (
     <Box
       sx={{ width, height }}
@@ -11,6 +11,7 @@ const Card = ({ width, height, name, price, img }) => {
       alignItems="flex-start"
       flexDirection="column"
       gap="5px"
+      className={classIdentifier}
     >
       <Box
         component="img"

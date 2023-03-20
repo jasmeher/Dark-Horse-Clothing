@@ -11,7 +11,14 @@ const Layout = () => {
       width="100%"
       sx={{ minHeight: "100vh", backgroundColor: palette.background.main }}
     >
+      <Box
+        className="noise"
+        width="100%"
+        height="100vh"
+        sx={{ position: "fixed", filter: "contrast(5)", opacity: "0.1" }}
+      />
       <Navbar />
+
       <Outlet />
     </Box>
   );

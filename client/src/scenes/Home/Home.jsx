@@ -1,5 +1,11 @@
 import { ArrowBackOutlined, ArrowForwardOutlined } from "@mui/icons-material";
-import { Box, Button, Typography, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import Card from "components/Card/Card";
 import React, { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
@@ -10,6 +16,9 @@ import collection from "static/collection.jpg";
 import category from "static/category.png";
 import categoryW from "static/category-w.png";
 import categoryM from "static/category-m.png";
+import about from "static/about.png";
+import gsap, { Expo } from "gsap";
+import Footer from "scenes/Footer/Footer";
 
 const Home = () => {
   const [naIndex, setNaIndex] = useState(0);
@@ -60,16 +69,43 @@ const Home = () => {
       img: women,
     },
   ];
-  const nextSlide = (index, setIndex) => {
+  const slideFadeOut = (className) => {
+    gsap.to(className, {
+      duration: 1,
+      y: -20,
+      opacity: 0,
+      ease: Expo.easeInOut,
+      stagger: 0.05,
+    });
+  };
+
+  const slideFadeIn = (className) => {
+    gsap.to(className, {
+      duration: 1,
+      y: 0,
+      opacity: 1,
+      ease: Expo.easeInOut,
+      stagger: 0.1,
+    });
+  };
+  const nextSlide = (index, setIndex, className) => {
+    slideFadeOut(className);
     const isLastSlide = index + 3 === products.length - 1;
 
     const newIndex = isLastSlide ? 0 : index + 4;
-    setIndex(newIndex);
+    setTimeout(() => {
+      setIndex(newIndex);
+      slideFadeIn(className);
+    }, 1000);
   };
-  const prevSlide = (index, setIndex) => {
+  const prevSlide = (index, setIndex, className) => {
+    slideFadeOut(className);
     const isFirstSlide = index === 0;
     const newIndex = isFirstSlide ? products.length - 4 : index - 4;
-    setIndex(newIndex);
+    setTimeout(() => {
+      setIndex(newIndex);
+      slideFadeIn(className);
+    }, 1000);
   };
   useEffect(() => {
     document.title = "DARK HORSE CLOTHING - HOME";
@@ -125,7 +161,7 @@ const Home = () => {
             <Button
               variant="contained"
               onClick={() => {
-                prevSlide(naIndex, setNaIndex);
+                prevSlide(naIndex, setNaIndex, ".newArrivals-anim");
               }}
             >
               <ArrowBackOutlined />
@@ -133,7 +169,7 @@ const Home = () => {
             <Button
               variant="contained"
               onClick={() => {
-                nextSlide(naIndex, setNaIndex);
+                nextSlide(naIndex, setNaIndex, ".newArrivals-anim");
               }}
             >
               <ArrowForwardOutlined />
@@ -174,6 +210,7 @@ const Home = () => {
               name={products[naIndex].name}
               price={products[naIndex].price}
               img={products[naIndex].img}
+              classIdentifier={"newArrivals-anim"}
             />
           </Box>
 
@@ -206,6 +243,7 @@ const Home = () => {
                 name={products[naIndex + 1].name}
                 price={products[naIndex + 1].price}
                 img={products[naIndex + 1].img}
+                classIdentifier={"newArrivals-anim"}
               />
             </Box>
             <Box
@@ -226,6 +264,7 @@ const Home = () => {
                 name={products[naIndex + 2].name}
                 price={products[naIndex + 2].price}
                 img={products[naIndex + 2].img}
+                classIdentifier={"newArrivals-anim"}
               />
             </Box>
             <Box
@@ -243,6 +282,7 @@ const Home = () => {
                 name={products[naIndex + 3].name}
                 price={products[naIndex + 3].price}
                 img={products[naIndex + 3].img}
+                classIdentifier={"newArrivals-anim"}
               />
             </Box>
           </Box>
@@ -302,7 +342,7 @@ const Home = () => {
             <Button
               variant="contained"
               onClick={() => {
-                prevSlide(bsIndex, setBsIndex);
+                prevSlide(bsIndex, setBsIndex, ".bestSelling-anim");
               }}
             >
               <ArrowBackOutlined />
@@ -310,7 +350,7 @@ const Home = () => {
             <Button
               variant="contained"
               onClick={() => {
-                nextSlide(bsIndex, setBsIndex);
+                nextSlide(bsIndex, setBsIndex, ".bestSelling-anim");
               }}
             >
               <ArrowForwardOutlined />
@@ -351,6 +391,7 @@ const Home = () => {
               name={products[bsIndex].name}
               price={products[bsIndex].price}
               img={products[bsIndex].img}
+              classIdentifier="bestSelling-anim"
             />
           </Box>
 
@@ -383,6 +424,7 @@ const Home = () => {
                 name={products[bsIndex + 1].name}
                 price={products[bsIndex + 1].price}
                 img={products[bsIndex + 1].img}
+                classIdentifier="bestSelling-anim"
               />
             </Box>
             <Box
@@ -403,6 +445,7 @@ const Home = () => {
                 name={products[bsIndex + 2].name}
                 price={products[bsIndex + 2].price}
                 img={products[bsIndex + 2].img}
+                classIdentifier="bestSelling-anim"
               />
             </Box>
             <Box
@@ -420,6 +463,7 @@ const Home = () => {
                 name={products[bsIndex + 3].name}
                 price={products[bsIndex + 3].price}
                 img={products[bsIndex + 3].img}
+                classIdentifier="bestSelling-anim"
               />
             </Box>
           </Box>
@@ -584,6 +628,142 @@ const Home = () => {
           </Box>
         </Box>
       </Box>
+      {/* DIVIDER */}
+      <Box
+        sx={{
+          width: "100%",
+          padding: "20px 20px",
+          borderBottom: "1px solid rgba(255,255,255,0.2)",
+          borderTop: "1px solid rgba(255,255,255,0.2)",
+        }}
+      >
+        <Marquee gradient={false} speed={150} style={{ overflow: "hidden" }}>
+          <Typography variant="h3" sx={{ letterSpacing: "3px", mr: "25px" }}>
+            ABOUT US
+          </Typography>
+          <Typography variant="h3" sx={{ letterSpacing: "3px", mr: "25px" }}>
+            ABOUT US
+          </Typography>
+          <Typography variant="h3" sx={{ letterSpacing: "3px", mr: "25px" }}>
+            ABOUT US
+          </Typography>
+          <Typography variant="h3" sx={{ letterSpacing: "3px", mr: "25px" }}>
+            ABOUT US
+          </Typography>
+        </Marquee>
+      </Box>
+      {/* ABOUT US SECTION */}
+      <Box sx={{ width: "100%", minHeight: "90vh" }}>
+        <Box
+          display="grid"
+          gridTemplateColumns="2fr 1fr"
+          minHeight="90vh"
+          sx={{
+            "& > div": {
+              gridColumn: isNonMediumScreensImg ? undefined : "span 12",
+            },
+          }}
+        >
+          <Box
+            minHeight="90vh"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+            gap="20px"
+            position="relative"
+          >
+            <Box
+              component="img"
+              alt="about"
+              src={about}
+              sx={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                filter: "grayscale(0.25)",
+              }}
+            />
+          </Box>
+          <Box
+            minHeight={isNonMediumScreensImg ? "90vh" : "50vh"}
+            display="flex"
+            justifyContent="center"
+            alignItems="flex-start"
+            padding="20px"
+            gap="20px"
+            flexDirection="column"
+            sx={{
+              borderLeft: "1px solid rgba(255,255,255,0.2)",
+              position: "relative",
+            }}
+          >
+            <Typography
+              variant="h1"
+              sx={{ position: "absolute", top: "20px", left: "20px" }}
+            >
+              ABOUT OUR BRAND
+            </Typography>
+            <Typography>
+              Dark Horse Clothing is a one-stop shop for all your fashion needs
+              featuring the world's top brands. Our ecommerce platform is
+              designed to give you a seamless shopping experience with quality
+              products at affordable prices.
+            </Typography>
+            <Button variant="contained">KNOW MORE</Button>
+          </Box>
+        </Box>
+      </Box>
+      {/* DIVIDER */}
+      <Box
+        sx={{
+          width: "100%",
+          padding: "20px 20px",
+          borderBottom: "1px solid rgba(255,255,255,0.2)",
+          borderTop: "1px solid rgba(255,255,255,0.2)",
+        }}
+      >
+        <Marquee gradient={false} speed={150} style={{ overflow: "hidden" }}>
+          <Typography variant="h3" sx={{ letterSpacing: "3px", mr: "25px" }}>
+            NEWSLETTER
+          </Typography>
+          <Typography variant="h3" sx={{ letterSpacing: "3px", mr: "25px" }}>
+            NEWSLETTER
+          </Typography>
+          <Typography variant="h3" sx={{ letterSpacing: "3px", mr: "25px" }}>
+            NEWSLETTER
+          </Typography>
+          <Typography variant="h3" sx={{ letterSpacing: "3px", mr: "25px" }}>
+            NEWSLETTER
+          </Typography>
+        </Marquee>
+      </Box>
+      {/* NEWSLETTER SECTION */}
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="column"
+        gap="20px"
+        sx={{ width: "100%", minHeight: "60vh", padding: "0 20px" }}
+      >
+        <Typography variant="h1">SUBSCRIBE TO OUR NEWSLETTER</Typography>
+        <Typography variant="body2" sx={{ opacity: "0.8" }}>
+          Stay on trend with our premium clothing and accessories. Subscribe to
+          our newsletter for exclusive deals and early access to new
+          collections.
+        </Typography>
+        <TextField
+          label="Email Address"
+          color="primary"
+          focused
+          sx={{
+            width: isNonSmallScreens ? "600px" : "200px",
+            padding: "10px",
+          }}
+        />
+      </Box>
+      <Footer />
     </>
   );
 };

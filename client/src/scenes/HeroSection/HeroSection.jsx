@@ -5,6 +5,7 @@ import graffiti from "static/graffiti-1.png";
 import crown from "static/crown.png";
 import React, { useState } from "react";
 import { ArrowBackOutlined, ArrowForwardOutlined } from "@mui/icons-material";
+import gsap, { Expo } from "gsap";
 
 const HeroSection = () => {
   const isNonMediumScreens = useMediaQuery("(min-width: 900px)");
@@ -26,16 +27,43 @@ const HeroSection = () => {
     },
   ];
 
+  const slideFadeOut = () => {
+    gsap.to(".hero-anim", {
+      duration: 1,
+      opacity: 0,
+      y: -20,
+      ease: Expo.easeInOut,
+      stagger: 0.1,
+    });
+  };
+
+  const slideFadeIn = () => {
+    gsap.to(".hero-anim", {
+      duration: 1,
+      opacity: 1,
+      y: 0,
+      ease: Expo.easeInOut,
+      stagger: 0.1,
+    });
+  };
+
   const prevSlide = () => {
+    slideFadeOut();
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? collections.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
+    setTimeout(() => {
+      setCurrentIndex(newIndex);
+      slideFadeIn();
+    }, 1000);
   };
   const NextSlide = () => {
+    slideFadeOut();
     const isLastSlide = currentIndex === collections.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
-
-    setCurrentIndex(newIndex);
+    setTimeout(() => {
+      setCurrentIndex(newIndex);
+      slideFadeIn();
+    }, 1000);
   };
 
   const onTouchStart = (e) => {
@@ -59,6 +87,7 @@ const HeroSection = () => {
         width: "100%",
         minHeight: "90vh",
         borderBottom: "1px solid rgba(255,255,255,0.2)",
+        position: "relative",
       }}
     >
       <Box
@@ -111,7 +140,11 @@ const HeroSection = () => {
               display: isNonMediumScreens ? "block" : "none",
             }}
           />
-          <Typography variant="body2" sx={{ opacity: "0.75" }}>
+          <Typography
+            variant="body2"
+            sx={{ opacity: "0.75" }}
+            className="hero-anim"
+          >
             {collections[currentIndex].desc}
           </Typography>
         </Box>
@@ -138,6 +171,7 @@ const HeroSection = () => {
               textTransform: "uppercase",
               display: isNonMediumScreens ? "block" : "none",
             }}
+            className="hero-anim"
           >
             NIKE
           </Typography>
@@ -162,7 +196,11 @@ const HeroSection = () => {
                   "invert(70%) sepia(27%) saturate(3890%) hue-rotate(81deg) brightness(160%) contrast(93%)",
               }}
             />
-            <Typography variant="h1" sx={{ textTransform: "uppercase" }}>
+            <Typography
+              variant="h1"
+              sx={{ textTransform: "uppercase" }}
+              className="hero-anim"
+            >
               {collections[currentIndex].title}
             </Typography>
           </Box>

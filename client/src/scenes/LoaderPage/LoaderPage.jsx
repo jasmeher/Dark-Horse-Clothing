@@ -1,11 +1,23 @@
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import React, { useEffect } from "react";
-import gsap, { Expo } from "gsap";
+import gsap, { Expo, Sine } from "gsap";
 
 const LoaderPage = () => {
   const theme = useTheme();
   const isNonSmallScreens = useMediaQuery("(min-width: 576px)");
-  const animationStart = () => {
+  const loadStart = () => {
+    gsap.to(".text-wrapper > p", {
+      x: "100",
+      ease: Sine.easeInOut,
+      stagger: 0.1,
+      duration: 1,
+      repeat: -1,
+      yoyo: true,
+      repeatDelay: 1,
+    });
+  };
+  const loadingFinish = () => {
+    gsap.killTweensOf(".text-wrapper > p");
     gsap.to(".text-wrapper > p", {
       x: isNonSmallScreens ? "500" : "100",
       ease: Expo.easeInOut,
@@ -50,9 +62,25 @@ const LoaderPage = () => {
       zIndex: -1,
       delay: 8,
     });
+    gsap.fromTo(
+      ".main > div",
+      {
+        y: 40,
+        opacity: 0,
+        duration: 0.5,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.1,
+        delay: 7,
+      }
+    );
   };
   useEffect(() => {
-    setTimeout(animationStart, 1000);
+    loadStart();
+    setTimeout(loadingFinish, 10000);
   }, []); // eslint-disable-line
   return (
     <>
@@ -89,6 +117,7 @@ const LoaderPage = () => {
               fontFamily: "Bebas Neue",
               opacity: "0.125",
               color: theme.palette.background.main,
+              cursor: "default",
             }}
             className="text"
             key={index}
