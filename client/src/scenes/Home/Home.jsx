@@ -9,7 +9,7 @@ import {
 import Card from "components/Card/Card";
 import React, { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
-import HeroSection from "scenes/HeroSection/HeroSection";
+import HeroSection from "scenes/Home/HeroSection";
 import men from "static/men.jpg";
 import women from "static/women.jpg";
 import collection from "static/collection.jpg";
@@ -704,7 +704,7 @@ const Home = () => {
             >
               ABOUT OUR BRAND
             </Typography>
-            <Typography>
+            <Typography sx={{ marginTop: isNonSmallScreens ? "0px" : "100px" }}>
               Dark Horse Clothing is a one-stop shop for all your fashion needs
               featuring the world's top brands. Our ecommerce platform is
               designed to give you a seamless shopping experience with quality
@@ -753,15 +753,23 @@ const Home = () => {
           our newsletter for exclusive deals and early access to new
           collections.
         </Typography>
-        <TextField
-          label="Email Address"
-          color="primary"
-          focused
-          sx={{
-            width: isNonSmallScreens ? "600px" : "200px",
-            padding: "10px",
-          }}
-        />
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          flexDirection={isNonSmallScreens ? "row" : "column"}
+        >
+          <TextField
+            label="Email Address"
+            color="primary"
+            focused
+            sx={{
+              width: isNonSmallScreens ? "600px" : "100%",
+              padding: "10px",
+            }}
+          />
+          <Button variant="contained">SUBMIT</Button>
+        </Box>
       </Box>
       <Footer />
     </>

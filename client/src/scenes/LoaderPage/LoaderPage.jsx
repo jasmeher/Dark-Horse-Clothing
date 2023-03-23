@@ -1,10 +1,11 @@
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import React, { useEffect } from "react";
 import gsap, { Expo, Sine } from "gsap";
+import disableScroll from "disable-scroll";
 
 const LoaderPage = () => {
   const theme = useTheme();
-  const isNonSmallScreens = useMediaQuery("(min-width: 576px)");
+  const isNonSmallScreens = useMediaQuery("(min-width: 768px)");
   const loadStart = () => {
     gsap.to(".text-wrapper > p", {
       x: "100",
@@ -62,26 +63,36 @@ const LoaderPage = () => {
       zIndex: -1,
       delay: 8,
     });
-    gsap.fromTo(
-      ".main > div",
-      {
-        y: 40,
-        opacity: 0,
-        duration: 0.5,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        stagger: 0.1,
-        delay: 7,
-      }
-    );
+    window.location.pathname === "/" &&
+      gsap.fromTo(
+        ".main > div",
+        {
+          y: 40,
+          opacity: 0,
+          duration: 0.5,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.1,
+          delay: 7,
+        }
+      );
+    disableScroll.off();
   };
   useEffect(() => {
+    if (window.location.pathname === "/") {
+      disableScroll.on();
+    }
+
     loadStart();
     setTimeout(loadingFinish, 10000);
   }, []); // eslint-disable-line
+
+  if (window.location.pathname !== "/") {
+    return null;
+  }
   return (
     <>
       <Box

@@ -6,10 +6,11 @@ import Layout from "scenes/Layout/Layout";
 import Home from "scenes/Home/Home";
 import CustomCursor from "components/Custom/CustomCursor";
 import LoaderPage from "scenes/LoaderPage/LoaderPage";
+import AllProducts from "scenes/Products/AllProducts";
 
 const App = () => {
   return (
-    <div className="app">
+    <div className="app" id="app">
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <LoaderPage />
@@ -19,6 +20,7 @@ const App = () => {
             <Routes>
               <Route element={<Layout />}>
                 <Route path="/" element={<Home />} />
+                <Route path="/products/:category" element={<AllProducts />} />
               </Route>
             </Routes>
           </Router>

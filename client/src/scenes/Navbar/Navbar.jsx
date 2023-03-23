@@ -30,47 +30,62 @@ const navCat = [
     title: "SEARCH",
     link: "/search",
     src: null,
+    sub: null,
   },
   {
     title: "MEN",
     link: "/products/men",
     src: men,
+    sub: ["all", "tops", "bottom", "footwear", "outerwear"],
   },
   {
     title: "WOMEN",
     link: "/products/women",
     src: women,
+    sub: ["all", "tops", "bottom", "footwear", "outerwear"],
   },
   {
     title: "UNISEX",
     link: "/products/unisex",
     src: unisex,
+    sub: ["all", "tops", "bottom", "footwear", "outerwear"],
   },
   {
     title: "ACCESSORIES",
     link: "/products/accessories",
     src: accessories,
+    sub: null,
+  },
+  {
+    title: "BROWSE COLLECTIONS",
+    link: "/products/collections",
+    src: null,
+    sub: null,
   },
   {
     title: "CART",
     link: "/cart",
     src: null,
+    sub: null,
   },
   {
     title: "FAVORITES",
     link: "/favorites",
     src: null,
+    sub: null,
   },
   {
     title: "SIGN IN",
     link: "/signin",
     src: null,
+    sub: null,
   },
 ];
 
 const Navbar = () => {
   const isMediumDevice = useMediaQuery("(max-width: 768px)");
   const theme = useTheme();
+  const [selectedIndex, setSelectedIndex] = useState(null);
   const navIcons = [
     {
       icon: <SearchOutlined />,
@@ -96,7 +111,7 @@ const Navbar = () => {
   return (
     <>
       <AppBar
-        position="static"
+        position="sticky"
         top="0"
         left="0"
         right="0"
@@ -107,7 +122,7 @@ const Navbar = () => {
           borderBottom: "1px solid rgb(255,255,255,0.2)",
           display: "flex",
           flexDirection: "row",
-          zIndex: "1",
+          zIndex: "10",
         }}
       >
         {/* LOGO SECTION */}
@@ -299,8 +314,7 @@ const Navbar = () => {
               {navCat.map((item, index) => {
                 if (index > 0 && index < 5) {
                   return (
-                    <Link
-                      to={item.link}
+                    <Box
                       className="text-reset"
                       onMouseOver={() => {
                         if (index === 1) {
@@ -317,53 +331,85 @@ const Navbar = () => {
                         }
                       }}
                       key={item.title}
+                      sx={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        gap: "30px",
+                        alignItems: "center",
+                        position: "relative",
+                        "&:hover": {
+                          "& > img": { opacity: "1" },
+                          cursor: "pointer",
+                        },
+                      }}
                     >
-                      <Box
-                        sx={{
-                          width: "100%",
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          position: "relative",
+                      <Hacker
+                        value={item.title}
+                        link={item.link}
+                        style={{
+                          width: "250px",
+                          fontSize: "3.5rem",
+                          marginBottom: "2rem",
                           "&:hover": {
-                            "& > img": { opacity: "1" },
+                            color: theme.palette.primary.main,
                           },
                         }}
-                      >
-                        <Hacker
-                          value={item.title}
-                          link={item.link}
-                          style={{
-                            width: "fit-content",
-                            fontSize: "3.5rem",
-                            marginBottom: "2rem",
-                            "&:hover": {
-                              color: theme.palette.primary.main,
-                            },
+                        onClick={() => setSelectedIndex(index)}
+                      />
+                      {item.sub !== null && (
+                        <Box
+                          display={index === selectedIndex ? "flex" : "none"}
+                          alignItems="center"
+                          gap="20px"
+                        >
+                          {item.sub.map((subLink) => (
+                            <Link
+                              to={`/products/${
+                                subLink === "all"
+                                  ? item.title.toLowerCase()
+                                  : subLink
+                              }`}
+                              className="text-reset"
+                              key={subLink}
+                            >
+                              <Typography
+                                variant="body2"
+                                sx={{
+                                  textTransform: "capitalize",
+                                  "&:hover": {
+                                    color: theme.palette.primary.main,
+                                    textDecoration: "underline",
+                                  },
+                                }}
+                              >
+                                {subLink}
+                              </Typography>
+                            </Link>
+                          ))}
+                        </Box>
+                      )}
+                      {item.src !== null && (
+                        <Box
+                          component="img"
+                          alt="category"
+                          src={item.src}
+                          sx={{
+                            opacity: "0",
+                            transition: "500ms ease",
+                            position: "absolute",
+                            width: "150px",
+                            top: "-50px",
+                            right: "0",
+                            transform: `rotate(-${Math.floor(
+                              Math.random() * 20
+                            )}deg)`,
+                            boxShadow:
+                              "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",
                           }}
                         />
-                        {item.src !== null && (
-                          <Box
-                            component="img"
-                            alt="category"
-                            src={item.src}
-                            sx={{
-                              opacity: "0",
-                              transition: "500ms ease",
-                              position: "absolute",
-                              width: "150px",
-                              top: "-50px",
-                              right: "0",
-                              transform: `rotate(-${Math.floor(
-                                Math.random() * 20
-                              )}deg)`,
-                              boxShadow:
-                                "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",
-                            }}
-                          />
-                        )}
-                      </Box>
-                    </Link>
+                      )}
+                    </Box>
                   );
                 }
                 if (index >= 5) {

@@ -1,8 +1,7 @@
 import { Typography } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
 
-const Hacker = ({ value, style, variant, link }) => {
+const Hacker = ({ value, style, variant, link, onClick }) => {
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const handleEffect = (e) => {
     let iterations = 0;
@@ -21,20 +20,15 @@ const Hacker = ({ value, style, variant, link }) => {
     }, 30);
   };
   return (
-    <Link
-      to={link}
+    <Typography
+      onMouseOver={handleEffect}
+      sx={style}
+      variant={variant}
       className="text-reset"
-      style={{ width: "fit-content", display: "block" }}
+      onClick={onClick}
     >
-      <Typography
-        onMouseOver={handleEffect}
-        sx={style}
-        variant={variant}
-        className="text-reset"
-      >
-        {value}
-      </Typography>
-    </Link>
+      {value}
+    </Typography>
   );
 };
 
