@@ -372,6 +372,7 @@ const Navbar = () => {
                               }`}
                               className="text-reset"
                               key={subLink}
+                              onClick={handleClose}
                             >
                               <Typography
                                 variant="body2"
@@ -423,7 +424,11 @@ const Navbar = () => {
                       }}
                       key={item.title}
                     >
-                      <Link to={item.link} className="text-reset">
+                      <Link
+                        to={item.link}
+                        className="text-reset"
+                        onClick={handleClose}
+                      >
                         {item.title}
                       </Link>
                     </Typography>

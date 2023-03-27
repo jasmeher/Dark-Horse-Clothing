@@ -57,6 +57,15 @@ const products = [
   },
 ];
 
+const filterCat = ["all", "tops", "bottoms", "footwear", "outerwear"];
+const filterSize = ["all", "xs", "s", "m", "l", "xl", "xxl"];
+const filterSort = [
+  "newest",
+  "bestsellers",
+  "price low - high",
+  "price high - low",
+];
+
 const Input = styled(MuiInput)`
   width: 80px;
 `;
@@ -224,26 +233,13 @@ const AllProducts = () => {
                     Category
                   </Typography>
                   <FormGroup>
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked />}
-                      label="All"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked />}
-                      label="Tops"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked />}
-                      label="Bottoms"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked />}
-                      label="Footwear"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked />}
-                      label="Outerwear"
-                    />
+                    {filterCat.map((filter) => (
+                      <FormControlLabel
+                        control={<Checkbox defaultChecked />}
+                        label={filter}
+                        sx={{ textTransform: "capitalize" }}
+                      />
+                    ))}
                   </FormGroup>
                 </Box>
                 <Box display="flex" flexDirection="column" gap="10px">
@@ -251,34 +247,13 @@ const AllProducts = () => {
                     SIZE
                   </Typography>
                   <FormGroup>
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked />}
-                      label="All"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked />}
-                      label="XS"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked />}
-                      label="S"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked />}
-                      label="M"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked />}
-                      label="L"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked />}
-                      label="XL"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked />}
-                      label="XXL"
-                    />
+                    {filterSize.map((filter) => (
+                      <FormControlLabel
+                        control={<Checkbox defaultChecked />}
+                        label={filter}
+                        sx={{ textTransform: "uppercase" }}
+                      />
+                    ))}
                   </FormGroup>
                 </Box>
                 <Box display="flex" flexDirection="column" gap="10px">
@@ -364,22 +339,13 @@ const AllProducts = () => {
                     SORT BY
                   </Typography>
                   <FormGroup>
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked />}
-                      label="Newest"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked />}
-                      label="Bestsellers"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked />}
-                      label="Price Low - High"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked />}
-                      label="Price High - Low"
-                    />
+                    {filterSort.map((filter) => (
+                      <FormControlLabel
+                        control={<Checkbox defaultChecked />}
+                        label={filter}
+                        sx={{ textTransform: "capitalize" }}
+                      />
+                    ))}
                   </FormGroup>
                 </Box>
               </Box>
@@ -445,22 +411,13 @@ const AllProducts = () => {
                 SORT BY
               </Typography>
               <FormGroup>
-                <FormControlLabel
-                  control={<Checkbox defaultChecked />}
-                  label="Newest"
-                />
-                <FormControlLabel
-                  control={<Checkbox defaultChecked />}
-                  label="Bestsellers"
-                />
-                <FormControlLabel
-                  control={<Checkbox defaultChecked />}
-                  label="Price Low - High"
-                />
-                <FormControlLabel
-                  control={<Checkbox defaultChecked />}
-                  label="Price High - Low"
-                />
+                {filterSort.map((filter) => (
+                  <FormControlLabel
+                    control={<Checkbox defaultChecked />}
+                    label={filter}
+                    sx={{ textTransform: "capitalize" }}
+                  />
+                ))}
               </FormGroup>
             </Box>
           </Popover>

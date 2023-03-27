@@ -202,7 +202,7 @@ const Home = () => {
             display="flex"
             justifyContent="center"
             minHeight="75vh"
-            maxHeight="75vh"
+            maxHeight={isNonSmallScreens ? undefined : "75vh"}
           >
             <Card
               width="80%"
@@ -383,7 +383,7 @@ const Home = () => {
             display="flex"
             justifyContent="center"
             minHeight="75vh"
-            maxHeight="75vh"
+            maxHeight={isNonSmallScreens ? undefined : "75vh"}
           >
             <Card
               width="80%"
@@ -704,7 +704,9 @@ const Home = () => {
             >
               ABOUT OUR BRAND
             </Typography>
-            <Typography sx={{ marginTop: isNonSmallScreens ? "0px" : "100px" }}>
+            <Typography
+              sx={{ marginTop: isNonMediumScreens ? "0px" : "150px" }}
+            >
               Dark Horse Clothing is a one-stop shop for all your fashion needs
               featuring the world's top brands. Our ecommerce platform is
               designed to give you a seamless shopping experience with quality
@@ -764,7 +766,7 @@ const Home = () => {
             color="primary"
             focused
             sx={{
-              width: isNonSmallScreens ? "600px" : "100%",
+              width: isNonSmallScreens ? "500px" : "80%",
               padding: "10px",
             }}
           />

@@ -7,6 +7,7 @@ import Home from "scenes/Home/Home";
 import CustomCursor from "components/Custom/CustomCursor";
 import LoaderPage from "scenes/LoaderPage/LoaderPage";
 import AllProducts from "scenes/Products/AllProducts";
+import SingleProduct from "scenes/Products/SingleProduct";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
               <Route element={<Layout />}>
                 <Route path="/" element={<Home />} />
                 <Route path="/products/:category" element={<AllProducts />} />
+                <Route path="/product/:id" element={<SingleProduct />} />
               </Route>
             </Routes>
           </Router>

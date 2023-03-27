@@ -4,8 +4,12 @@ import "./style.css";
 
 const CustomCursor = () => {
   const cursorRef = useRef(null);
-  const isMediumDevice = useMediaQuery("(max-width: 768px)");
-
+  const isMediumDevice = useMediaQuery(
+    "(max-width: 768px) and (orientation:portrait)"
+  );
+  const isMediumDeviceLandscape = useMediaQuery(
+    "(max-width: 768px) and (orientation:landscape)"
+  );
   const animateTrailer = (e, interacting) => {
     const x = e.clientX - cursorRef.current.offsetWidth / 2;
     const y = e.clientY - cursorRef.current.offsetHeight / 2;
@@ -35,7 +39,9 @@ const CustomCursor = () => {
     <div
       id="cursor"
       ref={cursorRef}
-      style={{ display: isMediumDevice ? "none" : "flex" }}
+      style={{
+        display: isMediumDevice || isMediumDeviceLandscape ? "none" : "flex",
+      }}
     ></div>
   );
 };

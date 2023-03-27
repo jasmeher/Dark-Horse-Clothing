@@ -1,6 +1,7 @@
 import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Card = ({ width, height, name, price, img, classIdentifier }) => {
   return (
@@ -26,9 +27,11 @@ const Card = ({ width, height, name, price, img, classIdentifier }) => {
       ></Box>
       <Typography variant="h4">{name}</Typography>
       <Typography variant="body1">${price.toFixed(2)}</Typography>
-      <Button variant="contained" sx={{ width: "100%", borderRadius: "0" }}>
-        VIEW
-      </Button>
+      <Link to="/product/1" className="text-reset" style={{ width: "100%" }}>
+        <Button variant="contained" sx={{ width: "100%", borderRadius: "0" }}>
+          VIEW
+        </Button>
+      </Link>
     </Box>
   );
 };
